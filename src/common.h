@@ -1,6 +1,9 @@
 #ifndef __INC_COMMON_H__
 #define __INC_COMMON_H__
 
+// =============================================================================
+// Public macro definitions
+// =============================================================================
 #define M_IWRAM_INITIALIZED_VAR __attribute__((section(".iwramData")))
 #define M_IWRAM_CONST_VAR __attribute__((section(".iwramRodata")))
 #define M_IWRAM_UNINITIALIZED_VAR __attribute__((section(".iwramBss")))
