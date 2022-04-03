@@ -47,29 +47,15 @@ extern void main(void);
 // =============================================================================
 // Extern symbol declarations
 // =============================================================================
-extern int g_sectionStart_physicalAddress_iwramText;
-extern int g_sectionStart_physicalAddress_iwramRodata;
-extern int g_sectionStart_physicalAddress_iwramData;
-extern int g_sectionStart_physicalAddress_iwramBss;
-extern int g_sectionStart_physicalAddress_ewramText;
-extern int g_sectionStart_physicalAddress_ewramRodata;
-extern int g_sectionStart_physicalAddress_ewramData;
-extern int g_sectionStart_physicalAddress_ewramBss;
-extern int g_sectionStart_romAddress_iwramText;
-extern int g_sectionStart_romAddress_iwramRodata;
-extern int g_sectionStart_romAddress_iwramData;
-extern int g_sectionStart_romAddress_iwramBss;
-extern int g_sectionStart_romAddress_ewramText;
-extern int g_sectionStart_romAddress_ewramRodata;
-extern int g_sectionStart_romAddress_ewramData;
-extern int g_sectionStart_romAddress_ewramBss;
-extern int g_sectionSize_iwramText;
-extern int g_sectionSize_iwramRodata;
-extern int g_sectionSize_iwramData;
+extern int g_sectionStart_virtualAddress_iwram;
+extern int g_sectionStart_virtualAddress_iwramBss;
+extern int g_sectionStart_virtualAddress_ewram;
+extern int g_sectionStart_virtualAddress_ewramBss;
+extern int g_sectionStart_romAddress_iwram;
+extern int g_sectionStart_romAddress_ewram;
+extern int g_sectionSize_iwram;
 extern int g_sectionSize_iwramBss;
-extern int g_sectionSize_ewramText;
-extern int g_sectionSize_ewramRodata;
-extern int g_sectionSize_ewramData;
+extern int g_sectionSize_ewram;
 extern int g_sectionSize_ewramBss;
 
 // =============================================================================
@@ -84,58 +70,30 @@ void _start(void) {
 // Private function definitions
 // =============================================================================
 static void init(void) {
-    // Copy .iwramText
+    // Copy .iwram section
     _memcpy(
-        &g_sectionStart_physicalAddress_iwramText,
-        &g_sectionStart_romAddress_iwramText,
-        (size_t)&g_sectionSize_iwramText
+        &g_sectionStart_virtualAddress_iwram,
+        &g_sectionStart_romAddress_iwram,
+        (size_t)&g_sectionSize_iwram
     );
 
-    // Copy .iwramRodata
+    // Copy .ewram section
     _memcpy(
-        &g_sectionStart_physicalAddress_iwramRodata,
-        &g_sectionStart_romAddress_iwramRodata,
-        (size_t)&g_sectionSize_iwramRodata
+        &g_sectionStart_virtualAddress_ewram,
+        &g_sectionStart_romAddress_ewram,
+        (size_t)&g_sectionSize_ewram
     );
 
-    // Copy .iwramData
-    _memcpy(
-        &g_sectionStart_physicalAddress_iwramData,
-        &g_sectionStart_romAddress_iwramData,
-        (size_t)&g_sectionSize_iwramData
-    );
-
-    // Clear .iwramBss
+    // Clear .iwramBss section
     _memset(
-        &g_sectionStart_physicalAddress_iwramBss,
+        &g_sectionStart_virtualAddress_iwramBss,
         0,
         (size_t)&g_sectionSize_iwramBss
     );
 
-    // Copy .ewramText
-    _memcpy(
-        &g_sectionStart_physicalAddress_ewramText,
-        &g_sectionStart_romAddress_ewramText,
-        (size_t)&g_sectionSize_ewramText
-    );
-
-    // Copy .ewramRodata
-    _memcpy(
-        &g_sectionStart_physicalAddress_ewramRodata,
-        &g_sectionStart_romAddress_ewramRodata,
-        (size_t)&g_sectionSize_ewramRodata
-    );
-
-    // Copy .ewramData
-    _memcpy(
-        &g_sectionStart_physicalAddress_ewramData,
-        &g_sectionStart_romAddress_ewramData,
-        (size_t)&g_sectionSize_ewramData
-    );
-
-    // Clear .ewramBss
+    // Clear .ewramBss section
     _memset(
-        &g_sectionStart_physicalAddress_ewramBss,
+        &g_sectionStart_virtualAddress_ewramBss,
         0,
         (size_t)&g_sectionSize_ewramBss
     );
